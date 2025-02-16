@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>puzzle</title> 
+    <link rel="stylesheet" href="css/42.css"> 
+</head> 
+<body> 
+    <div class="wrapper">
+        <div class="back">
+            <a href="main.html">вернуться на главную</a>
+        </div>
+        <div class="zons">
+            <div class="play">
+                <img src="img/Rectangle 38.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Rectangle 38.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Rectangle 36.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Rectangle 36.png" alt="" class="left draggable"  draggable="false">
+                <img src="img/Rectangle 37.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Rectangle 37.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Subtract.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Subtract.png" alt="" class="left draggable" draggable="false">
+                <img src="img/Polygon 3.png" alt="" class="right draggable" draggable="false">
+                <img src="img/Polygon 3.png" alt="" class="right draggable" draggable="false">
+                <img src="img/Polygon 2.png" alt="" class="right draggable" draggable="false">
+                <img src="img/Polygon 4.png" alt="" class="right draggable" draggable="false">
+                <img src="img/Subtract 1.png" alt="" class="right draggable" draggable="false">
+                <img src="img/Subtract 2.png" alt="" class="right draggable" draggable="false">
+                <div class="grass">
+                    <button class="button begin" id="begin">Начать</button>
+                    <button class="button mix" id="mix">Перемешать</button> 
+                </div>
+            </div>       
+        </div>
+        <div class="result" id="result">
+            <div class="popup" id="popup">
+                <span class="close" onclick="closePopup()">✖️</span>
+                <img src="img/custle.png" alt="" class="res">
+                <p class="">Вот что у тебя должно получится!</p>
+            </div>
+        </div>
+    </div>  
+    <script src="dnd.js"></script>
+</body>
+</html>
