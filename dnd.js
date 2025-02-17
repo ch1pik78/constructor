@@ -10,9 +10,8 @@ function closePopup() {
 
 
 const dragElement = document.querySelectorAll('.draggable');
-const playArea = document.querySelector('.play');
-const leftElements = document.querySelectorAll('.left')
-const rightElements = document.querySelectorAll('.right')
+const leftElements = document.querySelectorAll('.left');
+const rightElements = document.querySelectorAll('.right');
 
 
 
