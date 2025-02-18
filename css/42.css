@@ -258,6 +258,7 @@ header nav ul li:not(.btn) a:hover {
     justify-content: space-between;
 }
 
+
 .back a {
     cursor: pointer;
     transition: 0.4s all ease;
