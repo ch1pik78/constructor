@@ -31,7 +31,6 @@ header {
     padding-top: 30px;
 }
 
-
 header .logo {
     display: inline-block;
     font-family: "Press Start 2P";
@@ -41,23 +40,22 @@ header .logo {
     margin-left: 20px;
 }
 
-
 header nav {
     float: right;
     width: 40%;
 }
 
-header nav ul {
+header nav .nav-list {
     list-style: none;
     display: flex;
     justify-content: space-around;
 }
 
-header nav ul li {
+header nav .nav-list li {
     display: inline-block;
 }
 
-header nav ul li a {
+header nav .nav-list li a {
     color: #fff;
     margin-right: 90px;
     width: 10%;
@@ -68,23 +66,35 @@ header nav ul li a {
     font-size: 35px;
 }
 
-
-
-header nav ul li:not(.active) a {
+header nav .nav-list li:not(.active) a {
     color: #A9A8A9;
 }
 
-header nav ul li:not(.btn) a {
+header nav .nav-list li:not(.btn) a {
     cursor: pointer;
     transition: 0.4s all ease;
     position: relative;
 }
 
-header nav ul li:not(.btn) a:hover {
+header nav .nav-list li:not(.btn) a:hover {
     color: #D02646;
     transition: 0.4s all ease;
 }
 
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.burger-menu span {
+    background-color: #fff;
+    height: 3px;
+    width: 100%;
+}
 
 .hero {
     position: relative;
@@ -106,13 +116,12 @@ header nav ul li:not(.btn) a:hover {
 }
 
 .hero--info p {
-    font-weight: 1000px;
+    font-weight: 1000;
     font-size: 30px;
     line-height: 170%;
     padding-left: 70px;
     text-shadow: 2px 2px 5px #000;
     padding-top: 50px;
-
 }
 
 .hero--info img {
@@ -121,14 +130,13 @@ header nav ul li:not(.btn) a:hover {
     right: 110px;
     cursor: pointer;
     transition: all ease-in-out 0.5s;
-    width: 38%; 
-    height: auto; 
+    width: 38%;
+    height: auto;
 }
 
 .hero--info img:hover {
     transform: scale(1.1);
 }
-
 
 .overlay {
     display: none;
@@ -149,7 +157,6 @@ header nav ul li:not(.btn) a:hover {
     border-radius: 10px;
     width: 500px;
     height: 300px;
-    ;
     z-index: 1001;
 }
 
@@ -258,7 +265,6 @@ header nav ul li:not(.btn) a:hover {
     justify-content: space-between;
 }
 
-
 .back a {
     cursor: pointer;
     transition: 0.4s all ease;
@@ -276,7 +282,6 @@ header nav ul li:not(.btn) a:hover {
     color: #D02646;
     transition: 0.4s all ease;
 }
-
 
 .rules h2 {
     text-align: center;
@@ -420,19 +425,23 @@ header nav ul li:not(.btn) a:hover {
     transform: scale(1.1);
 }
 
+:root {
+    --scale: 1.3;
+}
+
 .draggable {
     position: absolute;
     z-index: 2;
     cursor: grab;
     touch-action: none;
-    top: auto;
-    left: auto;
-    transform: scale(1.3);
-    transition: transform 0.5s;
-    top: 40px;
-    rotate: 0deg;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    margin-top: 40px;
 }
 
+.draggable.dragging {
+    transition: none;
+}
 
 .zons {
     display: flex;
@@ -443,13 +452,12 @@ header nav ul li:not(.btn) a:hover {
     margin-top: 20px;
 }
 
-
 .play {
     border-style: solid;
     border-color: #000;
     border-width: 1px;
     width: 100%;
-    height: 100%;
+    height: 800px;
     background-color: #a6e4df;
     position: relative;
     z-index: 1;
@@ -467,9 +475,11 @@ header nav ul li:not(.btn) a:hover {
 
 .grass {
     background-color: #4db826;
-    width: auto;
+    width: 100%;
     height: 190px;
-    margin-top: 750px;
+    position: absolute;
+    bottom: 0;
+    margin-top: 0; 
 }
 
 .play .button {
@@ -505,7 +515,6 @@ header nav ul li:not(.btn) a:hover {
 .begin {
     bottom: 50px;
     left: 40px;
-
 }
 
 .mix {
@@ -513,10 +522,8 @@ header nav ul li:not(.btn) a:hover {
     right: 40px;
 }
 
-
 .result {
     display: none;
-    /* Скрываем оверлей по умолчанию */
     position: fixed;
     top: 0;
     left: 0;
@@ -568,4 +575,202 @@ header nav ul li:not(.btn) a:hover {
     top: 10px;
     right: 10px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --scale: 1.0;
+    }
+
+    header {
+        font-size: 18px;
+        padding-top: 10px;
+        padding: 10px 20px;
+    }
+
+    header .logo {
+        font-size: 60%;
+        margin-left: 10px;
+    }
+
+    header nav {
+        width: 60%;
+    }
+
+    header nav .nav-list li a {
+        font-size: 20px;
+        margin-right: 20px;
+        padding-right: 20px;
+    }
+
+    .hero--info {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .hero--info h1 {
+        font-size: 40px;
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    .hero--info p {
+        font-size: 18px;
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    .hero--info img {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 50%;
+        max-width: 300px;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .hero--info .btn {
+        padding: 15px 50px;
+        font-size: 18px;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .window {
+        width: 80%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .window p {
+        font-size: 18px;
+        margin-right: 0;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .back a {
+        font-size: 18px;
+        margin: 10px;
+    }
+
+    .rules h2 {
+        font-size: 40px;
+    }
+
+    .rules h3 {
+        font-size: 20px;
+    }
+
+    .rules .rectangle1, .rectangle2, .rectangle3, .rectangle4, .rectangle5 {
+        width: 100%;
+        max-width: 300px;
+        font-size: 18px;
+        line-height: 30px;
+        margin: 10px auto;
+    }
+
+    .rules .blocks1, .rules .blocks2 {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .play {
+        height: 600px;
+    }
+
+    .grass {
+        height: 150px;
+    }
+
+    .play .button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .begin, .mix {
+        bottom: 20px;
+    }
+
+    .popup {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .popup img {
+        max-width: 90%;
+        max-height: 70%;
+    }
+
+    .popup p {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --scale: 0.8;
+    }
+
+    header {
+        position: relative;
+    }
+
+    header nav {
+        width: auto;
+        float: none;
+    }
+
+    header nav .nav-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    header nav .nav-list.active {
+        display: flex;
+    }
+
+    header nav .nav-list li a {
+        font-size: 18px;
+        margin-right: 0;
+        padding: 5px 10px;
+        color: #fff;
+        width: auto;
+        height: auto;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    .hero--info h1 {
+        font-size: 30px;
+    }
+
+    .hero--info p {
+        font-size: 16px;
+    }
+
+    .hero--info img {
+        width: 50%;
+        max-width: 200px;
+    }
+
+    .hero--info .btn {
+        padding: 10px 30px;
+        font-size: 16px;
+    }
 }
