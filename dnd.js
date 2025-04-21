@@ -5,115 +5,130 @@ window.onload = function() {
 
 function closePopup() {
     document.getElementById('popup').style.display = 'none';
-    document.getElementById('result').style.display = 'none';
+    document.getElementById('result').style.display = 'none';  
 }
 
-
-const dragElement = document.querySelectorAll('.draggable');
+const dragElements = document.querySelectorAll('.draggable');
 const leftElements = document.querySelectorAll('.left');
 const rightElements = document.querySelectorAll('.right');
-
-
 
 const originalPositions = {
     leftElements: [],
     rightElements: []
 };
+
 leftElements.forEach(el => {
     originalPositions.leftElements.push({
         element: el,
-        top: el.style.top,
-        left: el.style.left,
-        right: el.style.right,
-        rotation: el.style.transform,
-        scale: el.style.transform
+        translateX: 0,
+        translateY: 0,
+        rotation: 0,
+        scale: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale')) || 1.3
     });
 });
+
 rightElements.forEach(el => {
     originalPositions.rightElements.push({
         element: el,
-        top: el.style.top,
-        left: el.style.left,
-        right: el.style.right,
-        rotation: el.style.transform,
-        scale: el.style.transform
-    });
-});
-document.getElementById('mix').addEventListener('click', function () {
-    originalPositions.leftElements.forEach(pos => {
-        pos.element.style.top = pos.top;
-        pos.element.style.left = pos.left;
-        pos.element.style.right = pos.right;
-    });
-    originalPositions.rightElements.forEach(pos => {
-        pos.element.style.top = pos.top;
-        pos.element.style.left = pos.left;
-        pos.element.style.right = pos.right;
-    });
-    originalPositions.leftElements.forEach(pos => {
-        pos.element.style.transform = 'rotate(0deg) ';
-        pos.element.style.transform = pos.scale;
-    });
-    originalPositions.rightElements.forEach(pos => {
-        pos.element.style.transform = 'rotate(0deg) ';
-        pos.element.style.transform = pos.scale; 
+        translateX: 0,
+        translateY: 0,
+        rotation: 0,
+        scale: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale')) || 1.3
     });
 });
 
+function updateTransform(pos) {
+    pos.element.style.transform = `translate(${pos.translateX}px, ${pos.translateY}px) rotate(${pos.rotation}deg) scale(${pos.scale})`;
+}
+
+originalPositions.leftElements.forEach(pos => updateTransform(pos));
+originalPositions.rightElements.forEach(pos => updateTransform(pos));
+
+document.getElementById('mix').addEventListener('click', function () {
+    originalPositions.leftElements.forEach(pos => {
+        pos.translateX = 0;
+        pos.translateY = 0;
+        pos.rotation = 0;
+        updateTransform(pos);
+    });
+    originalPositions.rightElements.forEach(pos => {
+        pos.translateX = 0;
+        pos.translateY = 0;
+        pos.rotation = 0;
+        updateTransform(pos);
+    });
+});
 
 let isDragging = false;
 let activeElement = null;
-let offsetX = 0;
-let offsetY = 0;
+let startX, startY, startTranslateX, startTranslateY;
 
 document.getElementById('begin').addEventListener('click', () => {
     isDragging = !isDragging; 
     
-    dragElement.forEach(function (element) {
-        let rotation = 0;
-        let scale = 1.3;
+    dragElements.forEach(function (element) {
+        let pos = originalPositions.leftElements.find(p => p.element === element) || 
+                  originalPositions.rightElements.find(p => p.element === element);
     
         element.ondblclick = function () {
-            rotation += 90; 
-            this.style.transformOrigin = 'center center'; 
-            this.style.transform = `rotate(${rotation}deg) scale(${scale})`; 
+            pos.rotation += 90; 
+            updateTransform(pos);
         };
     });
 });
 
-dragElement.forEach(function (element) {
+dragElements.forEach(function (element) {
     element.addEventListener('pointerdown', (event) => {
         if (!isDragging) return;
 
+        let pos = originalPositions.leftElements.find(p => p.element === element) || 
+                  originalPositions.rightElements.find(p => p.element === element);
+        activeElement = pos;
+        startX = event.clientX;
+        startY = event.clientY;
+        startTranslateX = pos.translateX;
+        startTranslateY = pos.translateY;
 
-        activeElement = element;
-
-        const rect = element.getBoundingClientRect();
-        offsetX = event.clientX - rect.left;
-        offsetY = event.clientY - rect.top;
-
+        element.classList.add('dragging');
         element.style.zIndex = 1000; 
         element.style.cursor = 'grabbing';
     });
-
-
-    document.addEventListener('pointermove', (event) => {
-        if (!isDragging || !activeElement) return;
-
-        const x = event.clientX - offsetX;
-        const y = event.clientY - offsetY;
-
-        activeElement.style.position = 'absolute';
-        activeElement.style.left = `${x}px`;
-        activeElement.style.top = `${y}px`;
-    });
-
-
-    document.addEventListener('pointerup', () => {
-        if (!isDragging) return;
-
-        activeElement.style.zIndex = '';
-        activeElement.style.cursor = 'grab';
-        activeElement = null;
-    });
 });
+
+document.addEventListener('pointermove', (event) => {
+    if (!isDragging || !activeElement) return;
+
+    const dx = (event.clientX - startX);
+    const dy = (event.clientY - startY);
+    activeElement.translateX = startTranslateX + dx;
+    activeElement.translateY = startTranslateY + dy;
+    updateTransform(activeElement);
+});
+
+document.addEventListener('pointerup', () => {
+    if (!isDragging) return;
+
+    activeElement.element.classList.remove('dragging');
+    activeElement.element.style.zIndex = '';
+    activeElement.element.style.cursor = 'grab';
+    activeElement = null;
+});
+
+function updateScale() {
+    const width = window.innerWidth;
+    let scale = 1.3;
+    if (width <= 480) scale = 0.8;
+    else if (width <= 768) scale = 1.0;
+
+    originalPositions.leftElements.forEach(pos => {
+        pos.scale = scale;
+        updateTransform(pos);
+    });
+    originalPositions.rightElements.forEach(pos => {
+        pos.scale = scale;
+        updateTransform(pos);
+    });
+}
+
+window.addEventListener('resize', updateScale);
+window.dispatchEvent(new Event('resize'))
