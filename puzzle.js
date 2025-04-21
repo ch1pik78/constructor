@@ -5,3 +5,6 @@ document.getElementById('myButton').addEventListener('click', function() {
 function goToPage(url) {
     window.location.href = url; 
 }
+document.querySelector('.burger-menu').addEventListener('click', function() {
+    document.querySelector('.nav-list').classList.toggle('active');
+});
