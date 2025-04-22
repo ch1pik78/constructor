@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +11,13 @@
         <header class="container">
             <span class="logo">constructor</span>
             <nav>
-                <ul>
-                    <li class="active"><a href="index.html">Главная</a></li>
+                <div class="burger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-list">
+                    <li class="active"><a href="main.html">Главная</a></li>
                     <li><a href="rules.html">Правила</a></li>
                 </ul>
             </nav>
@@ -26,7 +30,7 @@
                     Конструктор - это детская игра, представляющая собой набор деталей, из которых можно собирать
                     различные предметы, машины, сооружения и т. п. На этом сайте вы сможете собрать замок!
                 </p>
-                <img src="img/castle78.png">
+                <img src="img/castle78.png" alt="Castle">
                 <button class="btn" id="myButton">Играть</button>
                 <div class="overlay" id="overlay">
                     <div class="window">
@@ -35,7 +39,6 @@
                             <button class="yes" onclick="goToPage('play1.html')">Да</button>
                             <button class="no" onclick="goToPage('rules.html')">Нет</button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -43,5 +46,4 @@
     </div>
     <script src="puzzle.js"></script>
 </body>
-
 </html>
