@@ -433,10 +433,12 @@ header nav .nav-list li:not(.btn) a:hover {
     position: absolute;
     z-index: 2;
     cursor: grab;
-    touch-action: none;
     transform-origin: center;
     transition: transform 0.3s ease;
-    margin-top: 40px;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    touch-action: none;
+    user-select: none;
 }
 
 .draggable.dragging {
