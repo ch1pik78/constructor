@@ -48,7 +48,7 @@ header nav {
 header nav .nav-list {
     list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
 }
 
 header nav .nav-list li {
@@ -66,9 +66,9 @@ header nav .nav-list li a {
     font-size: 35px;
 }
 
-header nav .nav-list li:not(.active) a {
+/* header nav .nav-list li:not(.active) a {
     color: #A9A8A9;
-}
+} */
 
 header nav .nav-list li:not(.btn) a {
     cursor: pointer;
@@ -463,6 +463,11 @@ header nav .nav-list li:not(.btn) a:hover {
     -webkit-text-stroke: 0.5px #000;
     border-color: #00000000;
     font-weight: 800;
+}
+
+.butn:hover {
+    color: #D02646;
+    transition: 0.4s all ease;
 }
 
 .zons {
