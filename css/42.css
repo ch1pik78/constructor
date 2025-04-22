@@ -443,6 +443,28 @@ header nav .nav-list li:not(.btn) a:hover {
     transition: none;
 }
 
+.butn {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.butn {
+    cursor: pointer;
+    transition: 0.4s all ease;
+    background-color: #00000000;
+    position: sticky;
+    display: inline;
+    color: #F86A2D;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 30px;
+    -webkit-text-stroke: 0.5px #000;
+    border-color: #00000000;
+    font-weight: 800;
+}
+
 .zons {
     display: flex;
     justify-content: center;
