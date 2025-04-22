@@ -8,6 +8,12 @@ function closePopup() {
     document.getElementById('result').style.display = 'none';  
 }
 
+document.getElementById('hi').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('result').style.display = 'flex'; 
+});
+
+
 const dragElements = document.querySelectorAll('.draggable');
 const leftElements = document.querySelectorAll('.left');
 const rightElements = document.querySelectorAll('.right');
